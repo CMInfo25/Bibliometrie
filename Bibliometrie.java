@@ -6,8 +6,9 @@ public class Bibliometrie
     {
       Ecran.afficher("Ajouter un auteur : a\n");
       Ecran.afficher("Ajouter une publication : p\n");
-      Ecran.afficher("Ajouter une publication à un auteur : ap\n");
-      Ecran.afficher("Afficher les publications d'un auteur : apa");
+      Ecran.afficher("Afficher les auteurs : aa\n");
+      Ecran.afficher("Afficher les publications d'un auteur : ap\n");
+      Ecran.afficher("Afficher les statistiques d'un auteur : as\n");
       Ecran.afficher("Afficher l'aide : h\n");
       Ecran.afficher("Quitter : q\n");
     }
@@ -18,40 +19,43 @@ public class Bibliometrie
         printCommands();
         while (run)
         {
+            Ecran.afficher("> ");
             input = Clavier.saisirString();
             if (input.equals("a"))
             {
-              Ecran.afficher("\nNom : ");
+              Ecran.afficher("Nom : ");
               String nom = Clavier.saisirString();
-              Ecran.afficher("\nPrenom : ");
+              Ecran.afficher("Prenom : ");
               String prenom = Clavier.saisirString();
               Base.addAuteur(nom, prenom);
             }
             if (input.equals("p"))
             {
-              Ecran.afficher("\nTitre : ");
+              Ecran.afficher("id Auteur : ");
+              int auteur = Clavier.saisirInt();
+              Ecran.afficher("Titre : ");
               String titre = Clavier.saisirString();
-              Ecran.afficher("\nType ('conference' ou 'journal') : ");
+              Ecran.afficher("Type ('conference' ou 'journal') : ");
               String type = Clavier.saisirString();
-              Ecran.afficher("\nRecueil : ");
+              Ecran.afficher("Recueil : ");
               String recueil = Clavier.saisirString();
-              Ecran.afficher("\nAnnee : ");
+              Ecran.afficher("Annee : ");
               int annee = Clavier.saisirInt();
-              Base.addPublication(titre, type, recueil, annee);
+              Base.addPublication(auteur, titre, type, recueil, annee);
             }
+            if (input.equals("aa"))
+              Base.getAuteurs();
             if (input.equals("ap"))
             {
-              Ecran.afficher("\nid Auteur : ");
-              int auteur = Clavier.saisirInt();
-              Ecran.afficher("\nid Publication : ");
-              int publication = Clavier.saisirInt();
-              Base.addPubliAuteur(auteur, publication);
-            }
-            if (input.equals("apa"))
-            {
-              Ecran.afficher("\nid Auteur : ");
+              Ecran.afficher("id Auteur : ");
               int auteur = Clavier.saisirInt();
               Base.getPublications(auteur);
+            }
+            if (input.equals("as"))
+            {
+              Ecran.afficher("id Auteur : ");
+              int auteur = Clavier.saisirInt();
+              Base.getStats(auteur);
             }
             if (input.equals("h"))
                 printCommands();
